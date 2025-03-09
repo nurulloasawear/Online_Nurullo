@@ -55,8 +55,11 @@
                <div class="collapse navbar-collapse" id="main-navbar" >
                   <ul class="navbar-nav mr-auto w-100 justify-content-center">
                  	{% for header in for_header %}
+                      {% if header.slug %}
                  	 <li class="nav-item dropdown active" style="margin:4px!important">
-                        <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{ header.name }}</a></li>
+
+                        <a class="nav-link dropdown-toggle" href="{% url 'category_products' header.slug %}" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{ header.name }}</a></li>
+                     {% endif %}
               		
                  	{% endfor %}
                   </ul>
@@ -68,7 +71,7 @@
             <ul class="mobile-menu">
             {% for headers in for_header %}
                <li>
-                  <a class="active" href="#">
+                  <a class="active" href="{% url 'category_products'  headers.slug %}">
                   {{headers.name}}
                   </a></li>
             	}
@@ -93,30 +96,28 @@
                                  <div class="form-group inputwithicon">
                                     <div class="select">
                                        <select>
-                                          <option value="none">Locations</option>
-                                          <option value="none">New York</option>
-                                          <option value="none">California</option>
-                                          <option value="none">Washington</option>
-                                          <option value="none">Birmingham</option>
-                                          <option value="none">Chicago</option>
-                                          <option value="none">Phoenix</option>
+                                          {% for loc in location%}
+                                          <option value="none">{{ loc.name }}</option>
+                                          {% endfor %}
+                                        
                                        </select>
                                     </div>
                                     <i class="lni-target"></i>
                                  </div>
-                                 <div class="form-group inputwithicon">
-                                    <div class="select">
-                                       <select>
-                                       	 <option value="none">Select Option</option>
-                                       	{% for option in is_option %}
-                                          <option value="none">{{ option.name }}</option>
-                                       	}
-                                        {% endfor %}
-                                       </select>
-                                    </div>
-                                    <i class="lni-menu"></i>
-                                 </div>
-                                 <button class="btn btn-common" type="button"><i class="lni-search"></i> Search Now</button>
+                 <div class="form-group inputwithicon">
+    <div class="select">
+        <select id="categorySelect">
+            <option value="">Select Option</option>
+            {% for option in is_option %}
+                <option value="{% url 'category_products' option.slug %}">{{ option.name }}</option>
+            {% endfor %}
+        </select>
+    </div>
+    <i class="lni-menu"></i>
+</div>
+<button class="btn btn-common" type="button" onclick="goToCategory()">
+    <i class="lni-search"></i> Search Now
+</button>
                               </form>
                            </div>
                         </div>
@@ -134,7 +135,7 @@
                   <div id="categories-icon-slider" class="categories-wrapper owl-carousel owl-theme">
                   	{% for part in for_mid_part%}
                      <div class="item">
-                        <a href="category.html">
+                        <a href="{% url 'category_products'  part.slug %}">
                            <div class="category-icon-item">
                               <div class="icon-box">
                                  <div class="icon">
@@ -165,21 +166,23 @@
                         <div class="icon">
                            <span class="bg-green"><i class="lni-heart"></i></span>
                            <span><i class="lni-bookmark"></i></span>
+
                         </div>
+                        {% for product in  image %}
                         <a href="#"><img class="img-fluid" src="{{ product.image.url }}" alt=""></a>
+                        {% endfor %}
                      </figure>
-                     <div class="feature-content">
+                     <div class="feature-content" style="    display: flow-root;">
                         <div class="product">
-                           <a href="#">Electronic  </a>
-                           <a href="#">Cameras</a>
+                           <a href="#">{{ product.category }}  </a>
                         </div>
                         <h4><a href="ads-details.html">{{product.name}}</a></h4>
                         <div class="meta-tag">
                            <span>
-                           <a href="#"><i class="lni-user"></i> {{product.name}}</a>
+                           <a href="#"><i class="lni-user"></i> {{product.User}}</a>
                            </span>
                            <span>
-                           <a href="#"><i class="lni-map-marker"></i> New York, US</a>
+                           <a href="#"><i class="lni-map-marker"></i> {{ product.location }}</a>
                            </span>
                            <span>
                            <a href="#"><i class="lni-tag"></i> {{ product.name }}</a>
@@ -188,7 +191,8 @@
                         <p class="dsc">{{ product.description}}</p>
                         <div class="listing-bottom">
                            <h3 class="price float-left">{{product.price}}</h3>
-                           <a href="ads-details.html" class="btn btn-common float-right">View Details</a>
+                                           <a href="{% url 'product_detail' product.slug %}" class="btn btn-common float-right">View Details</a>
+
                         </div>
                      </div>
                   </div>
@@ -209,10 +213,12 @@
                      <div class="item">
                         <div class="product-item">
                            <div class="carousel-thumb">
+                              {% for product in image%}
                               <img class="img-fluid" src="{{ product.image.url}}" alt="">
+                              {% endfor %}
                               <div class="overlay">
                                  <div>
-                                    <a class="btn btn-common" href="ads-details.html">View Details</a>
+                                    <a class="btn btn-common" href="{% url 'product_detail' product.slug %}">View Details</a>
                                  </div>
                               </div>
                               <div class="btn-product bg-sale">
@@ -221,8 +227,8 @@
                               <span class="price">{{product.price}}</span>
                            </div>
                            <div class="product-content">
-                              <h3 class="product-title"><a href="ads-details.html">{{ product.name }}</a></h3>
-                              <span>Electronic / Computers</span>
+                              <h3 class="product-title"><a href="ads-details.html">{{ product.title }}</a></h3>
+                              <span>{{ product.category }}</span>
                               <div class="icon">
                                  <span><i class="lni-bookmark"></i></span>
                                  <span><i class="lni-heart"></i></span>
@@ -241,7 +247,8 @@
                                     </span>
                                  </div>
                                  <div class="float-right">
-                                    <a class="address" href="#"><i class="lni-map-marker"></i> New York</a>
+<a href="{% url 'product_detail' product.slug %}" class="btn btn-common float-right" style="color: white;">
+<i class="lni-map-marker"></i>  {{ product.location }}</a>
                                  </div>
                               </div>
                            </div>
@@ -646,16 +653,10 @@
                      <div class="widget">
                         <h3 class="block-title">Quick Link</h3>
                         <ul class="menu">
-                           <li><a href="#">- About Us</a></li>
-                           <li><a href="#">- Blog</a></li>
-                           <li><a href="#">- Events</a></li>
-                           <li><a href="#">- Shop</a></li>
-                           <li><a href="#">- FAQ's</a></li>
-                           <li><a href="#">- About Us</a></li>
-                           <li><a href="#">- Blog</a></li>
-                           <li><a href="#">- Events</a></li>
-                           <li><a href="#">- Shop</a></li>
-                           <li><a href="#">- FAQ's</a></li>
+                           {% for i in for_footer%}
+                           <li><a href="#">- {{ i.name }}</a></li>
+                           {% endfor %}
+                       
                         </ul>
                      </div>
                   </div>
@@ -709,4 +710,13 @@
       <script src="{% static 'js/form-validator.min.js'%}"></script>
       <script src="{% static 'js/contact-form-script.min.js'%}"></script>
       <script src="{% static 'js/summernote.js'%}"></script>
+      <script>
+    function goToCategory() {
+        var select = document.getElementById("categorySelect");
+        var selectedValue = select.value;
+        if (selectedValue) {
+            window.location.href = selectedValue;
+        }
+    }
+</script>
    </body>

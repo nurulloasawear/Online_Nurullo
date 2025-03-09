@@ -39,7 +39,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'main',
     'categorys',
-    'product'
+    'product',
+    'user'
 ]
 
 MIDDLEWARE = [
@@ -85,6 +86,18 @@ DATABASES = {
         'PASSWORD':'nurullo2@2',
         "HOST": "127.0.0.1",
         "PORT": "5432"
+    }
+}
+ 
+CACHES = {
+    'default': {
+        'BACKEND': 'django_redis.cache.RedisCache',  # TO‘G‘RI BACKEND NOMI
+        'LOCATION': '127.0.0.1:6379',
+        'OPTIONS': {
+         
+        'CLIENT_CLASS':'django_redis.client.DefaultClient'
+
+                 }
     }
 }
 
