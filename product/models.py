@@ -40,6 +40,6 @@ class ProductView(models.Model):
 	product = models.OneToOneField(Product,on_delete=models.CASCADE)
 	view_count = models.IntegerField(default=0)
 class ProductImage(models.Model):
-	product = models.ForeignKey(Product,on_delete=models.CASCADE)
-	image = models.ImageField(upload_to='products/')
+	product = models.ForeignKey(Product,on_delete=models.CASCADE,related_name='images')
+	image = models.ImageField(upload_to='products/',)
 	is_main = models.BooleanField(default=False)	
