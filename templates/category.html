@@ -117,11 +117,11 @@
                                 </li>
                             </ul>
                         </div>
-
+<!-- 
                         <div class="adds-wrapper">
                             <div class="tab-content">
                                 <div id="grid-view" class="tab-pane fade">
-                                    <div class="row">
+                                    <div class="row"> -->
 
 {% for prod in products %}
 <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
@@ -155,67 +155,35 @@
                 <!-- {% else %} -->
                     <!-- <span class="btn btn-disabled float-right">No Details</span> -->
                 <!-- {% endif %} -->
+
             </div>
         </div>
     </div>
 </div>
 {% endfor %}
+<div class="pagination">
+    <span class="step-links">
+        {% for num in products.paginator.page_range %}
+            {% if products.number == num %}
+                <button style="border: none;color: #ffffff;background: #e81e63;border-radius: 5pc 5pc;width: 50px;">
+                    {{ num }}
+                </button>
+            {% else %}
+                <a href="?page={{ num }}">
+                    <button style="border: none;color: #ffffff;background: gray;border-radius: 5pc 5pc;width: 50px;">
+                        {{ num }}
+                    </button>
+                </a>
+            {% endif %}
+        {% endfor %}
+    </span>
+</div>
 
 
 
-
-                                    </div>
-                                </div>
-                                <div id="list-view" class="tab-pane fade active show">
-                                    <div class="row">
-                                    	{% for prod in products %}
-                                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                                            <div class="featured-box">
-                                                <figure>
-                                                    <span class="price-save">
-                                                        {{prod.discount}}% Save
-                                                    </span>
-                                                    <div class="icon">
-                                                        <span class="bg-green"><i class="lni-heart"></i></span>
-                                                        <span><i class="lni-bookmark"></i></span>
-                                                    </div>
-                                                    <!-- {% for images in image %} -->
-                                                    <a href="#"><img class="img-fluid" src="{{ images.image.url }}" alt="" /></a>
-                                                    {% endfor %}
-                                                </figure>
-                                                <div class="feature-content">
-                                                    <div class="product">
-                                                        <a href="#">{{prod.category}} > </a>
-                                                        <a href="#">{{prod.title}}</a>
-                                                    </div>
-                                                    <h4><a href="ads-details.html">{{prod.title}}...</a></h4>
-                                                    <div class="meta-tag">
-                                                        <span>
-                                                            <a href="#"><i class="lni-user"></i> {{prod.User}}</a>
-                                                        </span>
-                                                        <span>
-                                                            <a href="#"><i class="lni-map-marker"></i>{{prod.location}}</a>
-                                                        </span>
-                                                        <span>
-                                                            <a href="#"><i class="lni-tag"></i>{{prod.title}} </a>
-                                                        </span>
-                                                    </div>
-                                                    <p class="dsc">{{prod.description}}</p>
-                                                    <div class="listing-bottom">
-                                                        <h3 class="price float-left">$249.00</h3>
-                                                       <!-- {% if prod.slug %} -->
-                    <a href="{% url 'product_detail' prod.slug %}" class="btn btn-common float-right">View Details</a>
-                <!-- {% else %} -->
-                    <!-- <span class="btn btn-disabled float-right">No Details</span> -->
-                <!-- {% endif %} -->
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        {% endfor %}
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+<br><div></div>
+<br>
+<br>
+<br>
 
 {% endblock content%}

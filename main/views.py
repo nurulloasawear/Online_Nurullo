@@ -33,10 +33,14 @@ def product_detail(request,slug):
 
 	}
 	return render(request,'post_detail.html',context)
+from django.core.paginator import Paginator
 from django.db.models import *
 def category_products(request,slug):
 	category = get_object_or_404(Categorys,slug=slug)
-	products = Product.objects.filter(category=category)
+	product = Product.objects.filter(category=category)
+	paginator  = Paginator(product,1)
+	pag_req = request.GET.get("page")
+	page_obj =  paginator.get_page(pag_req)
 	for_header = Categorys.objects.filter(for_header=True)
 	is_option =  Categorys.objects.filter(is_option=True)
 	location = Region.objects.all()
@@ -45,7 +49,7 @@ def category_products(request,slug):
 	ctg = Categorys.objects.filter(is_option=True).annotate(nm=Count('product')).values('name','nm')
 	context  = {
 		'category':category,
-		'products':products,
+		'products':page_obj,
 		'for_header':for_header,
 		'is_option':is_option,
 		'location':location,
