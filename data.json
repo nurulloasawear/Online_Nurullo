@@ -1,0 +1,337 @@
+[
+{
+  "model": "categorys.categorys",
+  "pk": 1,
+  "fields": {
+    "name": "Home",
+    "image": "",
+    "is_option": true,
+    "for_footer": false,
+    "for_mid_part": false,
+    "for_header": true,
+    "slug": "home",
+    "parent": null
+  }
+},
+{
+  "model": "categorys.categorys",
+  "pk": 3,
+  "fields": {
+    "name": "Categorys",
+    "image": "",
+    "is_option": false,
+    "for_footer": false,
+    "for_mid_part": false,
+    "for_header": true,
+    "slug": "categorys",
+    "parent": null
+  }
+},
+{
+  "model": "categorys.categorys",
+  "pk": 4,
+  "fields": {
+    "name": "Elektronika",
+    "image": "",
+    "is_option": true,
+    "for_footer": false,
+    "for_mid_part": false,
+    "for_header": false,
+    "slug": "Elektronika",
+    "parent": null
+  }
+},
+{
+  "model": "categorys.categorys",
+  "pk": 5,
+  "fields": {
+    "name": "Kiyim kechak",
+    "image": "",
+    "is_option": true,
+    "for_footer": false,
+    "for_mid_part": false,
+    "for_header": false,
+    "slug": "kiyim-kechak",
+    "parent": null
+  }
+},
+{
+  "model": "categorys.categorys",
+  "pk": 6,
+  "fields": {
+    "name": "Furniture",
+    "image": "categorys/img-6.png",
+    "is_option": false,
+    "for_footer": false,
+    "for_mid_part": true,
+    "for_header": false,
+    "slug": "Furniture",
+    "parent": null
+  }
+},
+{
+  "model": "categorys.categorys",
+  "pk": 7,
+  "fields": {
+    "name": "Nurullo",
+    "image": "categorys/img-6_rCU2mMC.png",
+    "is_option": false,
+    "for_footer": false,
+    "for_mid_part": true,
+    "for_header": false,
+    "slug": "nurullo",
+    "parent": null
+  }
+},
+{
+  "model": "categorys.categorys",
+  "pk": 8,
+  "fields": {
+    "name": "traveling",
+    "image": "",
+    "is_option": true,
+    "for_footer": false,
+    "for_mid_part": false,
+    "for_header": false,
+    "slug": "traveling",
+    "parent": null
+  }
+},
+{
+  "model": "categorys.categorys",
+  "pk": 9,
+  "fields": {
+    "name": "About us",
+    "image": "",
+    "is_option": false,
+    "for_footer": true,
+    "for_mid_part": false,
+    "for_header": true,
+    "slug": "foot",
+    "parent": null
+  }
+},
+{
+  "model": "categorys.region",
+  "pk": 1,
+  "fields": {
+    "name": "Tashkent",
+    "sorting": 1
+  }
+},
+{
+  "model": "categorys.region",
+  "pk": 2,
+  "fields": {
+    "name": "Samarkand",
+    "sorting": 2
+  }
+},
+{
+  "model": "categorys.region",
+  "pk": 3,
+  "fields": {
+    "name": "Jizzah",
+    "sorting": 3
+  }
+},
+{
+  "model": "categorys.region",
+  "pk": 4,
+  "fields": {
+    "name": "d",
+    "sorting": 5
+  }
+},
+{
+  "model": "categorys.brand",
+  "pk": 1,
+  "fields": {
+    "name": "Some Brand"
+  }
+},
+{
+  "model": "categorys.brand",
+  "pk": 2,
+  "fields": {
+    "name": "Mersedes-Benz"
+  }
+},
+{
+  "model": "categorys.brand",
+  "pk": 3,
+  "fields": {
+    "name": "Qatar airway"
+  }
+},
+{
+  "model": "product.product",
+  "pk": 2,
+  "fields": {
+    "title": "Mersedes gle",
+    "price": "230000.00",
+    "description": "Bestcar in the world",
+    "category": 3,
+    "location": 1,
+    "brand": 2,
+    "User": 1,
+    "discount": 0,
+    "slug": "Mersedec-Benz",
+    "condition": 1,
+    "status": 1,
+    "createdat": "2025-03-08",
+    "update_at": "2025-03-08"
+  }
+},
+{
+  "model": "product.product",
+  "pk": 3,
+  "fields": {
+    "title": "traveling to dubai 4 day",
+    "price": "359.99",
+    "description": "dubai be 4 day",
+    "category": 8,
+    "location": 1,
+    "brand": 3,
+    "User": 1,
+    "discount": 10,
+    "slug": "dubai-travel",
+    "condition": 1,
+    "status": 1,
+    "createdat": "2025-03-09",
+    "update_at": "2025-03-09"
+  }
+},
+{
+  "model": "product.product",
+  "pk": 4,
+  "fields": {
+    "title": "hhtghtehbet",
+    "price": "5281.60",
+    "description": "dvsfvsfvsfvdvs m.mhbxgfn vxrtnfc g",
+    "category": null,
+    "location": 1,
+    "brand": 1,
+    "User": 6,
+    "discount": 1,
+    "slug": "mmmm",
+    "condition": 1,
+    "status": 1,
+    "createdat": "2025-03-09",
+    "update_at": "2025-03-09"
+  }
+},
+{
+  "model": "product.product",
+  "pk": 5,
+  "fields": {
+    "title": "iphone 7",
+    "price": "927000.00",
+    "description": "cnadiunhwifnvwrk vwkivbngriunrkg hbeyht 9ithyr98uw4o yuer0yir6ea",
+    "category": 1,
+    "location": 1,
+    "brand": 1,
+    "User": 1,
+    "discount": -3,
+    "slug": "iphone-7",
+    "condition": 1,
+    "status": 1,
+    "createdat": "2025-03-12",
+    "update_at": "2025-03-12"
+  }
+},
+{
+  "model": "product.product",
+  "pk": 6,
+  "fields": {
+    "title": "dfadaas",
+    "price": "31.68",
+    "description": "3dfsdfsdfsdfs",
+    "category": 8,
+    "location": 1,
+    "brand": 2,
+    "User": 1,
+    "discount": 1,
+    "slug": "dasfdfasf",
+    "condition": 1,
+    "status": 1,
+    "createdat": "2025-03-16",
+    "update_at": "2025-03-16"
+  }
+},
+{
+  "model": "product.product",
+  "pk": 7,
+  "fields": {
+    "title": "neifvnoi",
+    "price": "2940.00",
+    "description": "freqnfuihruwg  fwrg wbtuign fwr vouefnwunf",
+    "category": 4,
+    "location": 2,
+    "brand": 1,
+    "User": 1,
+    "discount": 2,
+    "slug": "cdacadva",
+    "condition": 1,
+    "status": 1,
+    "createdat": "2025-03-17",
+    "update_at": "2025-03-17"
+  }
+},
+{
+  "model": "product.productimage",
+  "pk": 1,
+  "fields": {
+    "product": 2,
+    "image": "products/img1_64E6n6Y.jpg",
+    "is_main": true
+  }
+},
+{
+  "model": "product.productimage",
+  "pk": 2,
+  "fields": {
+    "product": 2,
+    "image": "products/img3.jpg",
+    "is_main": false
+  }
+},
+{
+  "model": "product.productimage",
+  "pk": 3,
+  "fields": {
+    "product": 3,
+    "image": "products/img5.jpg",
+    "is_main": true
+  }
+},
+{
+  "model": "product.productimage",
+  "pk": 4,
+  "fields": {
+    "product": 3,
+    "image": "products/img4.jpg",
+    "is_main": false
+  }
+},
+{
+  "model": "user.customuser",
+  "pk": 1,
+  "fields": {
+    "user": 1,
+    "first_name": "nurullo",
+    "phone_number": "+998974427733",
+    "image": "path/to/.."
+  }
+},
+{
+  "model": "user.customuser",
+  "pk": 6,
+  "fields": {
+    "user": 2,
+    "first_name": "Nurullo",
+    "phone_number": "+9989097600",
+    "image": "profile/img7_1H2DVt3.jpg"
+  }
+}
+]

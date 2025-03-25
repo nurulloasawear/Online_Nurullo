@@ -7,12 +7,10 @@ using namespace std;
 
 const int INF = numeric_limits<int>::max();
 
-// Graflarni ifodalash uchun struct
 struct Edge {
     int to, weight;
 };
 
-// Eng qisqa yo‘lni topish uchun Dijkstra algoritmi
 vector<int> dijkstra(int n, vector<vector<Edge>>& graph, int start) {
     vector<int> dist(n, INF);
     priority_queue<pair<int, int>, vector<pair<int, int>>, greater<>> pq;

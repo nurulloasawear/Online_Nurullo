@@ -1,8 +1,32 @@
-from django.shortcuts import render,get_object_or_404
+from django.shortcuts import render,get_object_or_404,redirect
 from categorys.models import *
 from product.models import *
 from user.models import *
+from .forms import *
+from django.contrib.auth import authenticate,login,logout
+# from django.contrib.auth import user
 # Create your views here.
+
+def login_view(request):
+	form = LoginForm()
+	if request.method == "POST":
+		form = LoginForm(request.POST)
+		if form.is_valid():
+			username = form.cleaned_data['login']
+			password = form.cleaned_data['password']
+			user = authenticate(request,username=username,password=password)
+			if user is not None :
+				login(request,user)
+				return redirect('main')
+			else:
+				form.add_error(None,"Login yoki oarol notogiri")
+		else:
+			form = LoginForm()
+	return render(request,'login.html',{'form':form})
+
+def logout_views(request):
+	logout(request)
+	return redirect('main')
 def main(request):
 	for_header = Categorys.objects.filter(for_header=True)
 	for_footer = Categorys.objects.filter(for_footer=True)
@@ -17,7 +41,8 @@ def main(request):
 		'for_mid_part':for_mid_part,
 		'products':products,
 		'is_option':is_option,
-		'location':location
+		'location':location,
+		# 'user':user
 	}
 	return render(request,'index-2.html',context)
 def product_detail(request,slug):
@@ -55,7 +80,9 @@ def category_products(request,slug):
 		'location':location,
 		'ctg':ctg,
 		'images':product_images,
-		'user':user
+		# 'user':user
 
 	}
 	return render(request,'category.html',context)	
+
+	

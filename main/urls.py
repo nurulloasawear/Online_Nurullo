@@ -4,9 +4,13 @@ from .views import *
 from django.conf import settings
 from django.conf.urls.static import static
 urlpatterns = [
-    path('',maind),
+    path('',maind,name='main'),
     path('product/<slug:slug>/',product_detail,name="product_detail"),
-    path('category/<slug:slug>/',category_products,name="category_products")
+    path('category/<slug:slug>/',category_products,name="category_products"),
+    path('login',login_view,name="login"),
+    path('logout',logout_views,name="logout")
+
+
 
 ]
 if settings.DEBUG:
