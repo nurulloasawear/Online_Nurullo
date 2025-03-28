@@ -7,6 +7,20 @@ from django.contrib.auth import authenticate,login,logout
 # from django.contrib.auth import user
 # Create your views here.
 
+def register_view(request):
+	form = RegisterForm()
+	if request.method == "POST":
+		form = RegisterForm(request.POST)
+		if form.is_valid():
+			form.save()
+			return redirect('login')
+		else:
+			form.add_error(None,"Toliq va hatolarsiz toldiring!")
+	context = {
+     'form':form
+		}
+	return render(request,'register.html',context)			
+
 def login_view(request):
 	form = LoginForm()
 	if request.method == "POST":
