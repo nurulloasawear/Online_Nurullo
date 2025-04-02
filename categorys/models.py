@@ -1,5 +1,5 @@
 from django.db import models
-
+from product.models import country
 # Create your models here.
 class Categorys(models.Model):
 	name = models.CharField(max_length=35)
@@ -14,7 +14,9 @@ class Categorys(models.Model):
 		return self.name
 
 
+
 class Region(models.Model):
+	country_id = models.ForeignKey(country,on_delete=models.CASCADE,default=1)
 	name = models.CharField(max_length=50,null=False,blank=True)
 	sorting = models.SmallIntegerField(null=False,blank=False,unique=True)
 

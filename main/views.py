@@ -23,6 +23,8 @@ def register_view(request):
 
 def login_view(request):
 	form = LoginForm()
+	url = request.GET.get('url','main')
+	print(url)
 	if request.method == "POST":
 		form = LoginForm(request.POST)
 		if form.is_valid():
@@ -31,7 +33,7 @@ def login_view(request):
 			user = authenticate(request,username=username,password=password)
 			if user is not None :
 				login(request,user)
-				return redirect('main')
+				return redirect(url)
 			else:
 				form.add_error(None,"Login yoki oarol notogiri")
 		else:
@@ -72,6 +74,33 @@ def product_detail(request,slug):
 
 	}
 	return render(request,'post_detail.html',context)
+
+def post_add(request):
+    form = ProductForm()
+    form_con = ContactForm()
+    form_img = imageForm()
+    if request.method == 'POST':
+        form = ProductForm(request.POST)
+        form_con = ContactForm(request.POST)
+        form_img = imageForm(request.POST)
+        if form.is_valid() and form_con.is_valid() and form_img.is_valid():
+            product = form.save(commit=False)
+            product.user = request.user
+            con = form_con.save(commit=False)
+            con.product = product
+            con.save()
+            f = form_img.save(commit=False)
+            f.product = product
+            f.save
+            return redirect('main')
+        else:
+            form.add_error(None, "Hamma field larni toldiring")
+    else:
+        form = ProductForm()
+        form_con = ContactForm()
+        form_img = imageForm()
+    return render(request, 'post_add.html', {'form': form, 'form_con': form_con, 'form_img': form_img})
+
 from django.core.paginator import Paginator
 from django.db.models import *
 def category_products(request,slug):
