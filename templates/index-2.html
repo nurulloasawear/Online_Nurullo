@@ -135,7 +135,7 @@
                            <div class="carousel-thumb">
                               {% for product in image%}
                               <img class="img-fluid" src="{{ product.image.url}}" alt="">
-                              {% endfor %}
+                              {% endfor %} 
                               <div class="overlay">
                                  <div>
                                     <a class="btn btn-common" href="{% url 'product_detail' product.slug %}">View Details</a>

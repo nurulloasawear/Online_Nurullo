@@ -22,9 +22,28 @@
 {% block content%}
 
 
-                <form method="post" class="login-form">
+                <form method="post" class="login-form" enctype="multipart/form-data">
 
                   {% csrf_token %}
+                  <br>
+                  <br>
+                  <br>
+
+                      {% if form.non_field_errors %}
+                     <div class="alert alert-danger">
+                        {{ form_con.non_field_errors }}
+                     </div>
+                  {% endif %}
+                      {% if form_img.non_field_errors %}
+                     <div class="alert alert-danger">
+                        {{ form.non_field_errors }}
+                     </div>
+                  {% endif %}
+                      {% if form.non_field_errors %}
+                     <div class="alert alert-danger">
+                        {{ form.non_field_errors }}
+                     </div>
+                  {% endif %}
       <div id="content" class="section-padding">
          <div class="container">
             <div class="row">
@@ -146,6 +165,21 @@
                                  <!-- <input class="form-control input-md" name="Title" placeholder="Title" type="text"> -->
                                  {{ form.discount }}
                               </div>
+                              <div class="form-group mb-3">
+                                 <label class="control-label">Project Brand </label>
+                                 <!-- <input class="form-control input-md" name="Title" placeholder="Title" type="text"> -->
+                                 {{ form.brand }}
+                              </div>
+                              <div class="form-group mb-3">
+                                 <label class="control-label">Project Brand </label>
+                                 <!-- <input class="form-control input-md" name="Title" placeholder="Title" type="text"> -->
+                                 {{ form.brand }}
+                              </div>
+                              <div class="form-group mb-3">
+                                 <label class="control-label">Project  conditon</label>
+                                 <!-- <input class="form-control input-md" name="Title" placeholder="Title" type="text"> -->
+                                 {{ form.condition }}
+                              </div>
                              
                               <div class="form-group mb-3">
                                  <label class="control-label">Project status</label>
@@ -161,11 +195,7 @@
                               <label class="tg-fileuploadlabel" for="tg-photogallery">
                               <span>Drop files anywhere to upload</span>
                               <span>Or</span>
-                                 {{ form_img.image }}
-                              <span>Maximum upload file size: 500 KB</span>
-                              {{ form_img.is_main }}
-                              {{ form_img.is_main.errors }}
-
+                              {{ form_img.as_p }}
                               <!-- <input id="tg-photogallery" class="tg-fileinput" type="file" name="file"> -->
                               </label>
                            </div>
@@ -194,19 +224,18 @@
                                  </div>
                                  <div class="form-group mb-3">
                                     <label class="control-label">First Name*</label>
-                                    {{form_con.first_name}}
+                                    {{ form_con.first_name }}
                                     <!-- <input class="form-control input-md" name="name" type="text"> -->
                                  </div>
                                  <div class="form-group mb-3">
                                     <label class="control-label">Last Name*</label>
-                                    {{form_con.last_name}}
+                                    {{ form_con.last_name }}
 
                                     <!-- <input class="form-control input-md" name="name" type="text"> -->
                                  </div>
                                  <div class="form-group mb-3">
                                     <label class="control-label">Phone*</label>
-                                    {{form_con.phone_n}}
-                                    {{form_con.phone_n.errors}}
+                                    {{ form_con.phone_n }}
 
                                     <!-- <input class="form-control input-md" name="phone" type="text"> -->
                                  </div>
@@ -218,16 +247,16 @@
                                  <!-- </div> -->
                                  <div class="form-group mb-3">
                                     <label class="control-label">Enter Address</label>
-                                    {{form_con.enter_address}}
-                                    {{form_con.enter_address.errors}}
+                                    {{ form_con.enter_address }}
+                                    <!-- {{form_con.enter_address.errors}} -->
 
                                     <!-- <input class="form-control input-md" name="address" type="text"> -->
                                  </div>
                                  <div class="form-group mb-3 tg-inputwithicon">
                                     <label class="control-label">Country</label>
                                     <div class="tg-select form-control">
-                                    {{form_con.country}}
-                                    {{form_con.country.errors}}
+                                    {{ form_con.country }}
+                                    <!-- {{form_con.country.errors}} -->
                                        
                                     </div>
                                  </div>
@@ -235,16 +264,13 @@
                                     <label class="control-label">State</label>
                                     <div class="tg-select form-control">
                                     {{form_con.state}}
-                                    {{form_con.state.errors}}
-                                     
+                                    <!-- {{form_con.state.errors}} -->
                                     </div>
                                  </div>
                                  <div class="form-group mb-3 tg-inputwithicon">
                                     <label class="control-label">City</label>
                                     <div class="tg-select form-control">
-                                    {{form_con.city_area}}
-                                    {{form_con.city_area.errors}}
-                                      
+                                    {{ form_con.city_area }}
                                     </div>
                                  </div>
                                  <div class="tg-checkbox">

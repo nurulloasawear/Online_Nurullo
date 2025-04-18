@@ -72,16 +72,7 @@ TEMPLATES = [
         },
     },
 ]
-TEMPLATE_CONTEXT_PROCESSORS = (
-    "django.contrib.auth.context_processors.auth",
-    "django.core.context_processors.debug",
-    "django.core.context_processors.i18n",
-    "django.core.context_processors.media",
-    "django.core.context_processors.static",
-    "django.core.context_processors.tz",
-    "django.contrib.messages.context_processors.messages",
-    "django.core.context_processors.request",
-)
+
 
 WSGI_APPLICATION = 'nexus.wsgi.application'
 
@@ -153,6 +144,14 @@ STATICFILES_DIRS=[
     BASE_DIR / "static"
 ]
 
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587  # Use 465 for SSL
+EMAIL_USE_TLS = True 
+EMAIL_USE_SSL = False  
+EMAIL_HOST_USER = 'qodiraliyevazizbekpdp@gmail.com'
+EMAIL_HOST_PASSWORD = 'azizbek1212'
+
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
@@ -166,3 +165,5 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+import ssl
+ssl._create_default_https_context = ssl._create_unverified_context

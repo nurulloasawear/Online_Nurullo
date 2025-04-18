@@ -4,7 +4,8 @@ from product.models import *
 from user.models import *
 from .forms import *
 from django.contrib.auth import authenticate,login,logout
-# from django.contrib.auth import user
+# from django.contrib.mail import send_mail
+from django.conf import settings
 # Create your views here.
 
 def register_view(request):
@@ -48,6 +49,7 @@ def main(request):
 	for_footer = Categorys.objects.filter(for_footer=True)
 	for_mid_part = Categorys.objects.filter(for_mid_part=True)
 	is_option =  Categorys.objects.filter(is_option=True)
+	# products = Product.objects.all()
 	products = Product.objects.prefetch_related(
         Prefetch('images', queryset=ProductImage.objects.filter(is_main=True), to_attr='main_images'))
 	location = Region.objects.all()
@@ -76,31 +78,39 @@ def product_detail(request,slug):
 	return render(request,'post_detail.html',context)
 
 def post_add(request):
-    form = ProductForm()
-    form_con = ContactForm()
-    form_img = imageForm()
     if request.method == 'POST':
         form = ProductForm(request.POST)
         form_con = ContactForm(request.POST)
-        form_img = imageForm(request.POST)
-        if form.is_valid() and form_con.is_valid() and form_img.is_valid():
+        form_img = ImageForm(request.POST, request.FILES)
+        print(form)
+        print(form_con)
+        print(form_img)
+        print(form.is_valid(),form_con.is_valid(),form_img.is_valid())
+        print(request.FILES)
+        if form.is_valid() and form_con.is_valid() and form_img.is_valid():#
             product = form.save(commit=False)
-            product.user = request.user
+            product.User = request.user.profile
+            product.save()
             con = form_con.save(commit=False)
             con.product = product
             con.save()
             f = form_img.save(commit=False)
             f.product = product
-            f.save
+            f.save()
+            # print("Error-form:",product)
+            # print("Error-form_con",con)
+            # print("Error-form_img",f)
+
             return redirect('main')
-        else:
-            form.add_error(None, "Hamma field larni toldiring")
     else:
         form = ProductForm()
         form_con = ContactForm()
-        form_img = imageForm()
-    return render(request, 'post_add.html', {'form': form, 'form_con': form_con, 'form_img': form_img})
-
+        form_img = ImageForm()
+    return render(request, 'post_add.html', {
+        'form': form,
+        'form_con': form_con,
+        'form_img': form_img
+    })
 from django.core.paginator import Paginator
 from django.db.models import *
 def category_products(request,slug):
@@ -127,5 +137,31 @@ def category_products(request,slug):
 
 	}
 	return render(request,'category.html',context)	
+# from django.shortcuts import render, redirect
+# from django.core.mail import send_mail
+# from django.conf import settings
+# from .forms import ContactForm
 
-	
+# def send_contact_email(request):
+#     if request.method == 'POST':
+#         form = ContactForm(request.POST)
+#         if form.is_valid():
+#             name = form.cleaned_data['name']
+#             email = form.cleaned_data['email']
+#             message = form.cleaned_data['message']
+
+#             full_message = f"From: {name} <{email}>\n\n{message}"
+
+#             send_mail(
+#                 subject="Yangi xabar websaytda",
+#                 message=full_message,
+#                 from_email=settings.EMAIL_HOST_USER,
+#                 recipient_list=['nurullostepn3@gmail.com'],
+#                 fail_silently=False
+#             )
+
+#             return redirect('main')  # Xabarning yuborilganidan so'ng asosiy sahifaga qaytish
+#     else:
+#         form = ContactForm()
+
+#     return render(request, 'contact.html', {'form': form})

@@ -34,7 +34,7 @@ class Product(models.Model):
 	def save(self,*args,**kwargs):
 		if self.discount:
 			self.price -= (self.price * self.discount / 100)
-			self.slug = slugfy(self.title)
+			self.slug = slugify(self.title)
 		super().save(*args,**kwargs)
 
 class ProductView(models.Model):
