@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-g%0sr+uf-1=bnp_#ya0^j@u@nbteq$=5mf=yya*09f+zvw#nds
 DEBUG = True
 
 ALLOWED_HOSTS = []
-
+APPEND_SLASH=True
 
 # Application definition
 
@@ -40,9 +40,18 @@ INSTALLED_APPS = [
     'main',
     'categorys',
     'product',
-    'user'
+    'user',
+    'rest_framework',
+    'api'
 ]
-
+REST_FRAMEWORK = {
+    'DEFAULT_RENDERER_CLASSES': [
+        'rest_framework.renderers.JSONRenderer',
+    ],
+    'DEFAULT_PARSER_CLASSES': [
+        'rest_framework.parsers.JSONParser',
+    ]
+}
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
