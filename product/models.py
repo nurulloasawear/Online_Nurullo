@@ -64,4 +64,4 @@ class ContactDetail(models.Model):
 	city_area = models.ForeignKey('product.Area',on_delete=models.CASCADE,default="Toshkent")
 
 	def __str__(self):
-		return self.product
+		return self.first_name

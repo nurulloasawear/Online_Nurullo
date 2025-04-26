@@ -1,7 +1,6 @@
 from product.models import * 
 from rest_framework import serializers as serializer
 
-
 		
 class ProductViewSerializer(serializer.ModelSerializer):
 	class Meta:
@@ -20,18 +19,16 @@ class ContactDetailSerializer(serializer.ModelSerializer):
 		model = ContactDetail
 		exclude = ['product']
 class ProductMultySerializer(serializer.ModelSerializer):
-	contactinfo = ContactDetailSerializer(read_only=True)
-	productimage = ProductImageSerializer(read_only=True)
+	contactinfo = ContactDetailSerializer(source='contactdetail', read_only=True)
+	productimage = ProductImageSerializer(source='images',many=True,read_only=True)
 	class Meta:
 		model = Product
-		exclude = ['createdat','update_at']
-
-	def create(self, validated_data):
-		contact_data = validated_data.pop('contact_info')
-		image_data = validated_data.pop('image')
-		user = self.context['request'].user.profile
-
-		product = Product.objects.create(User=user,**validated_data)
-		ContactDetail.objects.create(product=product,**contact_data)
-		ProductImage.objects.create(product=product,**image_data)
-		
+		exclude = ['createdat', 'update_at']
+	# def create(self, validated_data):
+	# 	contact_data = validated_data.pop('contactinfo')
+	# 	image_data = validated_data.pop('productimage')
+	# 	user = self.context['request'].user.profile
+	# 	product = Product.objects.create(User=user, **validated_data)
+	# 	ContactDetail.objects.create(product=product, **contact_data)
+	# 	ProductImage.objects.create(product=product, **image_data)
+	# 	return product

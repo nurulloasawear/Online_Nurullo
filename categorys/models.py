@@ -10,6 +10,8 @@ class Categorys(models.Model):
 	for_header = models.BooleanField(default=False)
 	slug = models.SlugField(unique=True)
 	parent = models.ForeignKey('self',on_delete=models.SET_NULL,null=True,blank=True)
+
+	
 	def __str__(self):
 		return self.name
 

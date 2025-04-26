@@ -42,7 +42,8 @@ INSTALLED_APPS = [
     'product',
     'user',
     'rest_framework',
-    'api'
+    'api',
+    'blog'
 ]
 REST_FRAMEWORK = {
     'DEFAULT_RENDERER_CLASSES': [

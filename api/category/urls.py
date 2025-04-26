@@ -1,10 +1,11 @@
 from django.urls import path,include
-from .views import get_list,multy,get,multypss
+from .views import *
 
 urlpatterns  = [
-	path('',get_list),
-	path('<int:pk>/',multy),
-	path('region/',get),
-	path('region/<int:pk>/',multypss)
-
+	path('',CategorysView.as_view()),
+	path('<int:pk>/',CategoryspkView.as_view()),
+	path('region/',RegionView.as_view()),
+	path('region/<int:pk>/',RegionpkView.as_view()),
+	path('brand/',Brands.as_view()),
+	path('brand/<int:pk>/',BrandPut.as_view())
 ]

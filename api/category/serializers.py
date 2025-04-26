@@ -10,3 +10,7 @@ class RegionSerializer(serializers.ModelSerializer):
         model = Region
         fields = ['id','name','sorting']
         
+class BrandSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Brand
+        fields = '__all__'
