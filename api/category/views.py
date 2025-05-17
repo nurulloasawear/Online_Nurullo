@@ -7,7 +7,7 @@ from rest_framework import status
 from rest_framework import status	
 from rest_framework.views import APIView as ApiView
 from .serializers import PostSerializer as CtSerializer,RegionSerializer,BrandSerializer
-
+from rest_framework.permissions import IsAuthenticated
 # @api_view(['GET', 'POST']) 
 # def get_list(request):
 # 	if request.method == 'GET':
@@ -132,6 +132,7 @@ class RegionpkView(ApiView):
 		self.scan(pk).delete()
 		return Response({"data":"deleted"},status=status.HTTP_204_NO_CONTENT)
 class CategorysView(ApiView):
+	permission_classes = [IsAuthenticated]
 	def get(self,request):
 		model = Categorys.objects.all()
 		ser = CtSerializer(model,many=True)

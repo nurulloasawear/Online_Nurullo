@@ -59,15 +59,7 @@
                   <a href="index-2.html" class="navbar-brand"><img src="{% static 'img/logo.png'%}" alt=""></a>
                </div>
                <div class="collapse navbar-collapse" id="main-navbar" >
-                  <ul class="navbar-nav mr-auto w-100 justify-content-center">
-                     {% for header in for_header %}
-                     {% if header.slug %}
-                     <li class="nav-item dropdown active" style="margin:4px!important">
-                        <a class="nav-link dropdown-toggle" href="{% url 'category_products' header.slug %}" >{{ header.name }}</a>
-                     </li>
-                     {% endif %}
-                     {% endfor %}
-                  </ul>
+               
                   <div class="post-btn">
                     {% if user.is_authenticated %}
                      <a class="btn btn-common" href="{% url 'post_add' %}"><i class="lni-pencil-alt"></i> Post an Ad</a>

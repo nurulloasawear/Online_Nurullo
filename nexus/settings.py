@@ -14,7 +14,7 @@ from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-
+# from django import settings
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
@@ -42,17 +42,34 @@ INSTALLED_APPS = [
     'product',
     'user',
     'rest_framework',
+    'rest_framework.authtoken',
     'api',
-    'blog'
+    'blog',
+    'rest_framework_simplejwt',
+    'rest_framework_simplejwt.token_blacklist',
 ]
 REST_FRAMEWORK = {
-    'DEFAULT_RENDERER_CLASSES': [
-        'rest_framework.renderers.JSONRenderer',
-    ],
-    'DEFAULT_PARSER_CLASSES': [
-        'rest_framework.parsers.JSONParser',
-    ]
+    'DEFAULT_AUTHENTICATION_CLASSES':(
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+
+        )
 }
+from datetime  import timedelta
+SIMPLE_JWT = {
+    "ACCESS_TOKEN_LIFETIME":timedelta(minutes=2),
+    "REFRESH_TOKEN_LIFETIME":timedelta(days=1),
+    "ROTATE_REFRESH_TOKENS":True,
+    "BLACKLIST_AFTER_ROTATION":True,
+    "UPDATE_LAST_LOGIN":True,
+    'TOKEN_OBTAIN_SERIALIZER':'api.serializers.MultiSerializer',
+    'ALGORITHM':'HS256',
+    # 'SIGNING_KEY':settings.SECRET_KEY,
+    'AUDIENCE':'admin'
+    # 'JWK_URL':"some-ware.to/path"# aws s3 yoki shunga oxshash serverlardan  malumot ob kelish uchun api reuqest da keladgan sorovlarni yuboryatgan paytda kalitham billa ketish kerak ularga ulanish uchun key lar kerak boladi keylarni esa berilgan manzildan topish mumkin
+    
+}
+SESSION_COOKIE_NAME = "Nurullo"
+SESSION_COOKIE_AGE = 3000
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -89,18 +106,20 @@ WSGI_APPLICATION = 'nexus.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
+# app/config/settings.py
+import os
 
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'Online',
-        'USER':'postgres',
-        'PASSWORD':'nurullo2@2',
-        "HOST": "127.0.0.1",
-        "PORT": "5432"
+        'NAME': os.getenv('POSTGRES_DB'),
+        'USER': os.getenv('POSTGRES_USER'),
+        'PASSWORD': os.getenv('POSTGRES_PASSWORD'),
+        'HOST': 'db',
+        'PORT': '5432',
     }
 }
- 
+
 CACHES = {
     'default': {
         'BACKEND': 'django_redis.cache.RedisCache',  # TO‘G‘RI BACKEND NOMI

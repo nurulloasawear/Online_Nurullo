@@ -19,8 +19,8 @@ class ContactDetailSerializer(serializer.ModelSerializer):
 		model = ContactDetail
 		exclude = ['product']
 class ProductMultySerializer(serializer.ModelSerializer):
-	contactinfo = ContactDetailSerializer(source='contactdetail', read_only=True)
-	productimage = ProductImageSerializer(source='images',many=True,read_only=True)
+	contactinfo = ContactDetailSerializer(source='contactdetail')
+	productimage = ProductImageSerializer(source='images',many=True)
 	class Meta:
 		model = Product
 		exclude = ['createdat', 'update_at']

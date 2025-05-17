@@ -1,0 +1,26 @@
+version: '3.8'
+services:
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - ./app:/app
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db
+    command: sh -c "sleep 10 && python manage.py migrate && python manage.py runserver 0.0.0.0:8000"
+  db:
+    build:
+      context: .
+      dockerfile: Dockerfile.db
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_DB=online
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=nurullo2@2
+
+volumes:
+  postgres_data:
